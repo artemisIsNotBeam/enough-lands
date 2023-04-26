@@ -1,0 +1,8 @@
+
+[build]
+  # Specify the runtime for your app
+  runtime = "python3.9"
+
+[dependencies]
+  # Specify the dependencies required by your app
+  pandas = "2,0.0"
