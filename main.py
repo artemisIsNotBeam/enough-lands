@@ -1,16 +1,16 @@
-import pandas as pd
 import numpy as np
 from tensorflow import keras
+import pandas as pd
 #from tensorflow.keras import layers
 
 import tensorflow as tf
 #import tensorflow_probability as tfp
-
-import pandas as pd
-import numpy as np
 from flask import Flask, render_template,request,redirect
 
-#from tensorflow import keras
+
+import sklearn
+# let's pull our handy linear fitter from our 'prediction' toolbox: sklearn!
+from sklearn.linear_model import LinearRegression
 
 train = pd.read_csv("data/lands.csv")
 test = pd.read_csv("data/testlands.csv")
@@ -27,10 +27,6 @@ testFeatures, testLabels= get_features_labels(test)
 
 trainFeatures = trainFeatures.astype('int')
 trainLabels = trainLabels.astype('int32')
-
-import sklearn
-# let's pull our handy linear fitter from our 'prediction' toolbox: sklearn!
-from sklearn.linear_model import LinearRegression
 
 # set up our model
 linear = LinearRegression()
@@ -72,6 +68,4 @@ def predict():
     return render_template("predict.html", should=should,exact = exact)
 
 if __name__ == '__main__':
-    port = 5000
-    print(f"The app is running on port {port}")
-    app.run(port=port, debug=True)
+    app.run(host='0.0.0.0', debug=False,port=5000)
